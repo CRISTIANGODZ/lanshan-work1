@@ -12,56 +12,32 @@ import java.util.Arrays;
  * 故将Lost两个方法抽象化，令其子类实现，但这种方式代码复用率高，故不提倡
  * 但是目前阶段解决问题我采用这种方式，等进度到之后会优化。
  */
-public class BookLost extends Lost{
+public class BookLost extends OneLost{
 
-    private OneLost[] lostArray;
+    private String bookName;
 
-    public BookLost() {
+
+    public BookLost(String lostNameClass, String lostTime) {
+        super(lostNameClass, lostTime);
     }
 
-    /*
-    由于从数据库中获取丢失物品数组，
-    故该地方以设置代码块给数组赋值
-    代替从数据库中获取数组的操作
-     */
-    {
-        lostArray = new OneLost[]{
-                new OneLost("《基督山伯爵》","2022-07-09 10:12:34"),
-                new OneLost("《欧也妮-葛朗台》","2022-07-08 12:23:32"),
-                new OneLost("《平凡的世界》","2022-07-13 05:43:10"),
-                new OneLost("《活着》","2022-07-03 20:19:12"),
-        };
+    public BookLost(String lostNameClass, String lostTime, String bookName) {
+        super(lostNameClass, lostTime);
+        this.bookName = bookName;
     }
 
-    @Override
-    public void sortLost(){
-        for (int i = 0; i < lostArray.length-1; i++) {
-            for (int j = i+1; j < lostArray.length; j++) {
-                if (lostArray[i].compareTo(lostArray[j]) > 0){
-                    OneLost oneLost = lostArray[i];
-                    lostArray[i] = lostArray[j];
-                    lostArray[j] = oneLost;
-                }
-            }
-        }
+    public String getBookName() {
+        return bookName;
+    }
+
+    public void setBookName(String bookName) {
+        this.bookName = bookName;
     }
 
     @Override
-    public void showInfo() {
-        for (int i = 0; i < lostArray.length; i++) {
-            System.out.println(lostArray[i]);
-        }
+    public String toString() {
+        return "BookLost{" +
+                "bookName='" + bookName + '\'' +
+                '}' + ", " + super.toString();
     }
-
-    @Override
-    public OneLost selectByKeyword(String lostName) {
-        for (int i = 0; i < lostArray.length; i++) {
-            if (lostArray[i].getLostName().equals(lostName)){
-                return lostArray[i];
-            }
-        }
-        throw new RuntimeException("未找到该物品");
-    }
-
-
 }

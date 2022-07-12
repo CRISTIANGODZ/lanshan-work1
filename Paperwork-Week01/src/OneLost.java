@@ -19,8 +19,8 @@ public class OneLost implements Comparable{
         this.lostName = lostName;
     }
 
-    public OneLost(String lostName, String lostTime) {
-        this.lostName = lostName;
+    public OneLost(String lostNameClass, String lostTime) {
+        this.lostName = lostNameClass;
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         try {
